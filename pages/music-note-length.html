@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>세아 똑똑해지는 중 - 음표 길이 알기</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/common.css">
+</head>
+<body data-category="music">
+
+  <!-- Top Nav -->
+  <nav class="top-nav">
+    <div class="top-nav-bar music"></div>
+    <a class="back-btn" href="../index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+      돌아가기
+    </a>
+    <div class="top-nav-title">음표 길이 알기</div>
+  </nav>
+
+  <main class="content-wrapper">
+
+    <!-- 개념 설명 -->
+    <section class="section-card" id="concept-section">
+      <div class="section-label">개념 배우기</div>
+      <div class="concept-intro">
+        <div class="character-area music">🎶</div>
+        <div class="speech-bubble music">
+          안녕! 나는 <strong>음표 친구</strong>야! 🎵<br>
+          오늘은 나랑 같이 <strong>음표의 길이</strong>를 배워볼 거야!<br>
+          음표 친구들이 달리기 시합을 하는데, 누가 제일 오래 달릴까?
+        </div>
+      </div>
+
+      <div class="concept-highlight music">
+        음표는 모양에 따라 <strong class="music">소리 길이</strong>가 달라요!<br>
+        <strong class="music">온음표</strong>가 제일 길고, <strong class="music">8분음표</strong>가 제일 짧아요. 🏃‍♂️
+      </div>
+
+      <div class="concept-visual" style="font-size: 22px; line-height: 2.5;">
+        <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; align-items:center;">
+          <div style="text-align:center;">
+            <div style="font-size:48px;">𝅝</div>
+            <div style="font-size:14px; color:var(--music-dark); font-weight:700;">온음표<br>(4박)</div>
+          </div>
+          <div style="font-size:24px; color:var(--text-light);">></div>
+          <div style="text-align:center;">
+            <div style="font-size:48px;">𝅗𝅥</div>
+            <div style="font-size:14px; color:var(--music-dark); font-weight:700;">2분음표<br>(2박)</div>
+          </div>
+          <div style="font-size:24px; color:var(--text-light);">></div>
+          <div style="text-align:center;">
+            <div style="font-size:48px;">♩</div>
+            <div style="font-size:14px; color:var(--music-dark); font-weight:700;">4분음표<br>(1박)</div>
+          </div>
+          <div style="font-size:24px; color:var(--text-light);">></div>
+          <div style="text-align:center;">
+            <div style="font-size:48px;">♪</div>
+            <div style="font-size:14px; color:var(--music-dark); font-weight:700;">8분음표<br>(반박)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 흐름 연결 -->
+    <div class="flow-connector music"><span>🎵 같이 풀어볼까?</span></div>
+
+    <!-- 예시 문제 -->
+    <section class="section-card">
+      <div class="example-heading">✏️ 이렇게 풀어봐요!</div>
+
+      <div style="text-align:center; font-size:20px; font-weight:700; margin-bottom:20px; color: var(--text-light);">
+        온음표(𝅝)는 4분음표(♩) 몇 개와 같을까?
+      </div>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <span class="highlight">온음표</span>는 <span class="highlight">4박</span>이야!<br>
+          🎵 "온음표는 제일 오래 소리를 내는 음표야!"
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <span class="highlight">4분음표</span>는 <span class="highlight">1박</span>이야!<br>
+          🎵 "4분음표는 기본이 되는 음표란다!"
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          4박 = 1박 × <span class="highlight">4</span>개!<br>
+          🎵 "그러니까 온음표 1개 = 4분음표 <span class="highlight">4</span>개야!"
+        </div>
+      </div>
+    </section>
+
+    <!-- 흐름 연결 -->
+    <div class="flow-connector music"><span>🎵 이제 네가 해볼 차례야!</span></div>
+
+    <!-- 연습 문제 -->
+    <section class="section-card" id="practice-section">
+      <div class="progress-section" style="padding:0 0 16px;">
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill music" id="progress-fill" style="width: 0%;"></div>
+        </div>
+        <div class="progress-label">
+          <span>문제 풀기</span>
+          <span id="progress-count">0 / 5</span>
+        </div>
+      </div>
+
+      <div id="problems-container"></div>
+
+      <div style="margin-top: 16px;">
+        <button class="btn-primary" id="submit-btn" onclick="checkAllAnswers()">정답 확인하기 ✓</button>
+      </div>
+    </section>
+
+    <!-- 결과 -->
+    <section id="result-section" style="display:none;"></section>
+
+    <!-- 다시 풀기 -->
+    <div id="retry-buttons" style="display:none; flex-direction:column; gap:12px;">
+      <button class="btn-primary" onclick="resetPractice(true)">다시 풀어볼래요! 🔄</button>
+      <button class="btn-secondary" onclick="scrollToConcept()">개념 다시 보기 📖</button>
+    </div>
+
+    <!-- 관련 주제 -->
+    <section class="section-card">
+      <div class="section-label">🎵 이런 것도 해볼래?</div>
+      <div class="related-grid">
+        <a class="related-card" href="math-carrying.html">
+          <div class="icon">🐰</div>
+          <div class="title">받아올림 덧셈</div>
+          <div class="desc">10이 넘으면 올려줘요</div>
+        </a>
+        <a class="related-card" href="korean-dictation.html">
+          <div class="icon">📖</div>
+          <div class="title">받아쓰기 연습</div>
+          <div class="desc">소리를 듣고 바르게 써봐요</div>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="../js/common.js"></script>
+  <script>
+    initPractice({
+      title: "음표 길이 알기",
+      category: "music",
+      character: "🎵",
+      characterName: "음표 친구",
+
+      problems: [
+        {
+          question: "온음표(𝅝)는 몇 박일까?",
+          answer: "4",
+          type: "choice",
+          choices: ["1", "2", "4", "8"],
+          correctMsg: "맞아! 온음표는 4박이야! 🎶",
+          wrongMsg: "온음표는 제일 긴 음표야, 4박이란다!"
+        },
+        {
+          question: "2분음표(𝅗𝅥)는 몇 박일까?",
+          answer: "2",
+          type: "choice",
+          choices: ["1", "2", "4", "반박"],
+          correctMsg: "정답! 2분음표는 2박! 🎶",
+          wrongMsg: "2분음표는 온음표의 절반, 2박이야!"
+        },
+        {
+          question: "4분음표(♩) 2개는 몇 박일까?",
+          answer: "2",
+          type: "choice",
+          choices: ["1", "2", "4", "8"],
+          correctMsg: "와! 잘 알고 있구나! 🌟",
+          wrongMsg: "4분음표는 1박이니까, 2개면 2박이야!"
+        },
+        {
+          question: "온음표 1개 = 4분음표 몇 개?",
+          answer: "4",
+          type: "choice",
+          choices: ["1", "2", "4", "8"],
+          correctMsg: "완벽해! 음표 박사야! 🎵",
+          wrongMsg: "온음표는 4박, 4분음표는 1박이니까 4개야!"
+        },
+        {
+          question: "8분음표(♪) 2개는 몇 박일까?",
+          answer: "1",
+          type: "choice",
+          choices: ["반박", "1", "2", "4"],
+          correctMsg: "대단해! 리듬감이 좋구나! 🥁",
+          wrongMsg: "8분음표는 반박이니까, 2개면 1박이야!"
+        }
+      ],
+
+      resultMessages: {
+        excellent: "우와! 음표 친구가 감동받았어! 리듬의 천재야! 🎶🎶🎶",
+        good: "잘했어! 음표 친구들이랑 조금만 더 연습하자! 🎵🎵",
+        retry: "괜찮아! 음표 친구도 처음엔 헷갈렸어. 같이 다시 해보자! 💪"
+      }
+    });
+  </script>
+</body>
+</html>

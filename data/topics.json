@@ -1,0 +1,34 @@
+{
+  "topics": [
+    {
+      "id": "math-carrying",
+      "title": "받아올림 덧셈",
+      "concept": "10이 넘으면 윗자리로 올려줘요!",
+      "story": "토끼가 당근을 세다가 고민에 빠졌어요…",
+      "category": "math",
+      "icon": "🐰",
+      "difficulty": 2,
+      "page": "pages/math-carrying.html"
+    },
+    {
+      "id": "music-note-length",
+      "title": "음표 길이 알기",
+      "concept": "음표 모양마다 소리 길이가 달라요!",
+      "story": "음표 친구들이 달리기 시합을 시작했어요…",
+      "category": "music",
+      "icon": "🎶",
+      "difficulty": 1,
+      "page": "pages/music-note-length.html"
+    },
+    {
+      "id": "korean-dictation",
+      "title": "받아쓰기 연습",
+      "concept": "소리를 잘 듣고 바르게 써봐요!",
+      "story": "글자 탐험가가 숨은 글자를 찾고 있어요…",
+      "category": "korean",
+      "icon": "📖",
+      "difficulty": 2,
+      "page": "pages/korean-dictation.html"
+    }
+  ]
+}

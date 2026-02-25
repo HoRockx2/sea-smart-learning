@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>세아 똑똑해지는 중 - 받아올림 덧셈</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/common.css">
+</head>
+<body data-category="math">
+
+  <!-- Top Nav -->
+  <nav class="top-nav">
+    <div class="top-nav-bar math"></div>
+    <a class="back-btn" href="../index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+      돌아가기
+    </a>
+    <div class="top-nav-title">받아올림 덧셈</div>
+  </nav>
+
+  <main class="content-wrapper">
+
+    <!-- 개념 설명 -->
+    <section class="section-card" id="concept-section">
+      <div class="section-label">개념 배우기</div>
+      <div class="concept-intro">
+        <div class="character-area math">🐰</div>
+        <div class="speech-bubble math">
+          안녕! 나는 <strong>토끼</strong>야. 🥕<br>
+          오늘은 나랑 같이 <strong>받아올림 덧셈</strong>을 배워볼 거야!<br>
+          내가 당근을 세다가 고민에 빠졌거든…
+        </div>
+      </div>
+
+      <div class="concept-highlight math">
+        일의 자리를 더했을 때 <strong class="math">10이 넘으면</strong>,
+        넘친 만큼 <strong class="math">십의 자리로 올려줘요</strong>!<br>
+        마치 사탕 10개가 모이면 한 봉지에 담는 것처럼요. 🍬
+      </div>
+
+      <div class="concept-visual">
+        <div style="margin-bottom: 8px;">
+          <span style="opacity:0">+</span>
+          <span style="display:inline-block;background:#FFC107;color:white;width:32px;height:32px;border-radius:50%;font-size:18px;line-height:32px;text-align:center;vertical-align:super;font-weight:700;">1</span><br>
+        </div>
+        <span style="opacity:0">+</span> 2 <strong>7</strong><br>
+        + 1 <strong>8</strong><br>
+        <span style="border-bottom:3px solid #333;padding-bottom:4px;">
+          <span style="opacity:0">+</span> 4 5
+        </span>
+      </div>
+    </section>
+
+    <!-- 흐름 연결 -->
+    <div class="flow-connector math"><span>🐰 같이 풀어볼까?</span></div>
+
+    <!-- 예시 문제 -->
+    <section class="section-card">
+      <div class="example-heading">✏️ 이렇게 풀어봐요!</div>
+
+      <div style="text-align:center; font-size:24px; font-weight:700; margin-bottom:20px; letter-spacing:2px; color: var(--text-light);">
+        27 + 18 = ?
+      </div>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          먼저 <span class="highlight">일의 자리</span>끼리 더해요.<br>
+          🐰 "7 + 8 = <span class="highlight">15</span>!"
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          15는 10보다 크죠? 10을 넘은 <span class="highlight">1</span>을 십의 자리로 올려줘요!<br>
+          🐰 "일의 자리에는 <span class="highlight">5</span>만 남겨놓자!"
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <span class="highlight">십의 자리</span>끼리 더하고, 올려준 1도 함께!<br>
+          🐰 "2 + 1 + 1 = <span class="highlight">4</span>! 그래서 답은 <span class="highlight">45</span>!"
+        </div>
+      </div>
+    </section>
+
+    <!-- 흐름 연결 -->
+    <div class="flow-connector math"><span>🐰 이제 네가 해볼 차례야!</span></div>
+
+    <!-- 연습 문제 -->
+    <section class="section-card" id="practice-section">
+      <div class="progress-section" style="padding:0 0 16px;">
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill math" id="progress-fill" style="width: 0%;"></div>
+        </div>
+        <div class="progress-label">
+          <span>문제 풀기</span>
+          <span id="progress-count">0 / 5</span>
+        </div>
+      </div>
+
+      <div id="problems-container"></div>
+
+      <div style="margin-top: 16px;">
+        <button class="btn-primary" id="submit-btn" onclick="checkAllAnswers()">정답 확인하기 ✓</button>
+      </div>
+    </section>
+
+    <!-- 결과 -->
+    <section id="result-section" style="display:none;"></section>
+
+    <!-- 다시 풀기 -->
+    <div id="retry-buttons" style="display:none; flex-direction:column; gap:12px;">
+      <button class="btn-primary" onclick="resetPractice(true)">다시 풀어볼래요! 🔄</button>
+      <button class="btn-secondary" onclick="scrollToConcept()">개념 다시 보기 📖</button>
+    </div>
+
+    <!-- 관련 주제 -->
+    <section class="section-card">
+      <div class="section-label">🐰 이런 것도 해볼래?</div>
+      <div class="related-grid">
+        <a class="related-card" href="music-note-length.html">
+          <div class="icon">🎶</div>
+          <div class="title">음표 길이 알기</div>
+          <div class="desc">음표마다 소리 길이가 달라요</div>
+        </a>
+        <a class="related-card" href="korean-dictation.html">
+          <div class="icon">📖</div>
+          <div class="title">받아쓰기 연습</div>
+          <div class="desc">소리를 듣고 바르게 써봐요</div>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="../js/common.js"></script>
+  <script>
+    initPractice({
+      title: "받아올림 덧셈",
+      category: "math",
+      character: "🐰",
+      characterName: "토끼",
+
+      problems: [
+        {
+          question: "36 + 27 = ?",
+          answer: 63,
+          type: "input",
+          correctMsg: "잘했어요! 토끼가 당근을 더 줄게요! 🥕",
+          wrongMsg: "아깝다! 6+7=13이니까, 1을 올려주는 거야!"
+        },
+        {
+          question: "48 + 35 = ?",
+          answer: 83,
+          type: "input",
+          correctMsg: "완벽해! 토끼가 깜짝 놀랐어! 🥕",
+          wrongMsg: "8+5=13, 1을 올려주는 걸 기억하자!"
+        },
+        {
+          question: "19 + 54 = ?",
+          answer: 73,
+          type: "input",
+          correctMsg: "대단해! 당근 왕이야! 🥕🥕",
+          wrongMsg: "9+4=13이니까, 1을 올려줘야 해!"
+        },
+        {
+          question: "67 + 28 = ?",
+          answer: 95,
+          type: "input",
+          correctMsg: "와! 천재 토끼 친구구나! 🌟",
+          wrongMsg: "7+8=15, 1을 올려주는 거 잊지 마!"
+        },
+        {
+          question: "45 + 39 = ?",
+          answer: 84,
+          type: "input",
+          correctMsg: "최고야! 토끼가 엄지 척! 👍",
+          wrongMsg: "5+9=14, 4만 남기고 1을 올려줘!"
+        }
+      ],
+
+      resultMessages: {
+        excellent: "우와! 토끼가 깜짝 놀랐어! 당근을 거의 다 세줬구나! 🥕🥕🥕🥕🥕",
+        good: "잘했어! 조금만 더 연습하면 완벽해질 거야! 🥕🥕🥕",
+        retry: "괜찮아! 토끼도 처음엔 당근 세기가 어려웠어. 같이 다시 해보자! 💪"
+      }
+    });
+  </script>
+</body>
+</html>

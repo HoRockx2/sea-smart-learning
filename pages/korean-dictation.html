@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>세아 똑똑해지는 중 - 받아쓰기 연습</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/common.css">
+</head>
+<body data-category="korean">
+
+  <!-- Top Nav -->
+  <nav class="top-nav">
+    <div class="top-nav-bar korean"></div>
+    <a class="back-btn" href="../index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+      돌아가기
+    </a>
+    <div class="top-nav-title">받아쓰기 연습</div>
+  </nav>
+
+  <main class="content-wrapper">
+
+    <!-- 개념 설명 -->
+    <section class="section-card" id="concept-section">
+      <div class="section-label">개념 배우기</div>
+      <div class="concept-intro">
+        <div class="character-area korean">📖</div>
+        <div class="speech-bubble korean">
+          안녕! 나는 <strong>글자 탐험가</strong>야! 🔍<br>
+          오늘은 나랑 같이 <strong>받아쓰기</strong>를 연습해볼 거야!<br>
+          숨은 글자를 찾아서 바르게 써보자!
+        </div>
+      </div>
+
+      <div class="concept-highlight korean">
+        받아쓰기에서 <strong class="korean">자주 틀리는 단어</strong>들이 있어요!<br>
+        소리와 글자가 <strong class="korean">다른 경우</strong>를 잘 기억해봐요. 📝
+      </div>
+
+      <div class="concept-visual" style="font-size: 20px; line-height: 2.2;">
+        <div style="display:flex; justify-content:center; gap:24px; flex-wrap:wrap;">
+          <div style="text-align:center; padding:12px 16px; background:var(--korean-bg); border-radius:12px;">
+            <div style="font-size:14px; color:var(--text-light);">소리</div>
+            <div style="font-size:22px; font-weight:700;">같이</div>
+          </div>
+          <div style="font-size:28px; color:var(--korean-dark); align-self:center;">→</div>
+          <div style="text-align:center; padding:12px 16px; background:var(--korean-bg); border-radius:12px;">
+            <div style="font-size:14px; color:var(--text-light);">바른 표기</div>
+            <div style="font-size:22px; font-weight:700; color:var(--korean-dark);">같이</div>
+          </div>
+        </div>
+        <div style="margin-top:12px; font-size:15px; color:var(--text-light);">
+          소리와 글자가 같은 경우도 있지만, 다른 경우를 잘 기억하자!
+        </div>
+      </div>
+    </section>
+
+    <!-- 흐름 연결 -->
+    <div class="flow-connector korean"><span>📖 같이 풀어볼까?</span></div>
+
+    <!-- 예시 문제 -->
+    <section class="section-card">
+      <div class="example-heading">✏️ 이렇게 풀어봐요!</div>
+
+      <div style="text-align:center; font-size:20px; font-weight:700; margin-bottom:20px; color: var(--text-light);">
+        "꽃잎"의 바른 표기는?
+      </div>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          소리를 잘 들어봐요.<br>
+          📖 "'꼰닙'이라고 들리지? 하지만 이건 소리일 뿐이야!"
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          어떤 단어들이 합쳐진 건지 생각해봐요.<br>
+          📖 "<span class="highlight">꽃</span> + <span class="highlight">잎</span> = 꽃잎이야!"
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          원래 단어의 글자를 그대로 써주면 돼요!<br>
+          📖 "소리는 '꼰닙'이지만, 바르게 쓰면 <span class="highlight">꽃잎</span>이야!"
+        </div>
+      </div>
+    </section>
+
+    <!-- 흐름 연결 -->
+    <div class="flow-connector korean"><span>📖 이제 네가 해볼 차례야!</span></div>
+
+    <!-- 연습 문제 -->
+    <section class="section-card" id="practice-section">
+      <div class="progress-section" style="padding:0 0 16px;">
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill korean" id="progress-fill" style="width: 0%;"></div>
+        </div>
+        <div class="progress-label">
+          <span>문제 풀기</span>
+          <span id="progress-count">0 / 5</span>
+        </div>
+      </div>
+
+      <div id="problems-container"></div>
+
+      <div style="margin-top: 16px;">
+        <button class="btn-primary" id="submit-btn" onclick="checkAllAnswers()">정답 확인하기 ✓</button>
+      </div>
+    </section>
+
+    <!-- 결과 -->
+    <section id="result-section" style="display:none;"></section>
+
+    <!-- 다시 풀기 -->
+    <div id="retry-buttons" style="display:none; flex-direction:column; gap:12px;">
+      <button class="btn-primary" onclick="resetPractice(true)">다시 풀어볼래요! 🔄</button>
+      <button class="btn-secondary" onclick="scrollToConcept()">개념 다시 보기 📖</button>
+    </div>
+
+    <!-- 관련 주제 -->
+    <section class="section-card">
+      <div class="section-label">📖 이런 것도 해볼래?</div>
+      <div class="related-grid">
+        <a class="related-card" href="math-carrying.html">
+          <div class="icon">🐰</div>
+          <div class="title">받아올림 덧셈</div>
+          <div class="desc">10이 넘으면 올려줘요</div>
+        </a>
+        <a class="related-card" href="music-note-length.html">
+          <div class="icon">🎶</div>
+          <div class="title">음표 길이 알기</div>
+          <div class="desc">음표마다 소리 길이가 달라요</div>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="../js/common.js"></script>
+  <script>
+    initPractice({
+      title: "받아쓰기 연습",
+      category: "korean",
+      character: "📖",
+      characterName: "글자 탐험가",
+
+      problems: [
+        {
+          question: "바른 표기를 골라봐! [꼰닙]",
+          answer: "꽃잎",
+          type: "choice",
+          choices: ["꼰닙", "꽃잎", "꼳잎", "꽃닢"],
+          correctMsg: "맞아! 꽃 + 잎 = 꽃잎이야! 🌸",
+          wrongMsg: "'꽃'과 '잎'이 합쳐진 거야! 꽃잎이 정답!"
+        },
+        {
+          question: "바른 표기를 골라봐! [문닫아]",
+          answer: "문 닫아",
+          type: "choice",
+          choices: ["문 다다", "문 닫아", "문 다타", "문 닿아"],
+          correctMsg: "잘했어! '닫아'가 맞아! 📖",
+          wrongMsg: "'닫다'에서 온 말이야! '문 닫아'가 정답!"
+        },
+        {
+          question: "바른 표기를 골라봐! [할아버지]",
+          answer: "할아버지",
+          type: "choice",
+          choices: ["하라버지", "할아버지", "하라부지", "할아부지"],
+          correctMsg: "완벽해! 글자 탐험가도 감동! 🌟",
+          wrongMsg: "소리 그대로 '할아버지'야! 잘 기억하자!"
+        },
+        {
+          question: "바른 표기를 골라봐! [부엌]",
+          answer: "부엌",
+          type: "choice",
+          choices: ["부억", "부엌", "부엊", "부얶"],
+          correctMsg: "대단해! '부엌' 맞았어! 🏠",
+          wrongMsg: "받침이 'ㄲ'이 아니라 'ㅋ'이야! 부엌!"
+        },
+        {
+          question: "바른 표기를 골라봐! [읽다]",
+          answer: "읽다",
+          type: "choice",
+          choices: ["읽다", "익다", "일다", "잃다"],
+          correctMsg: "최고야! 글자 박사! 📚",
+          wrongMsg: "소리는 '익따'이지만, 글자는 '읽다'야!"
+        }
+      ],
+
+      resultMessages: {
+        excellent: "우와! 글자 탐험가가 깜짝 놀랐어! 받아쓰기 왕이야! 📚📚📚",
+        good: "잘했어! 조금만 더 연습하면 받아쓰기 만점이야! 📝📝",
+        retry: "괜찮아! 글자 탐험가도 처음엔 어려웠어. 같이 다시 해보자! 💪"
+      }
+    });
+  </script>
+</body>
+</html>

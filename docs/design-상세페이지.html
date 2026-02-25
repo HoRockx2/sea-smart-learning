@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>세아 똑똑해지는 중 - 상세 페이지 디자인 (받아올림 덧셈)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --primary: #4472C4;
+  --math: #FFC107;
+  --math-bg: #FFF8E1;
+  --math-dark: #F57F17;
+  --correct: #27AE60;
+  --correct-bg: #E8F5E9;
+  --wrong: #E74C3C;
+  --wrong-bg: #FFEBEE;
+  --bg: #F5F7FA;
+  --card-bg: #FFFFFF;
+  --text: #333333;
+  --text-light: #777777;
+  --shadow: 0 4px 12px rgba(0,0,0,0.08);
+  --radius: 16px;
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+/* ── Top Nav ── */
+.top-nav {
+  background: white;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.top-nav-bar {
+  height: 4px;
+  background: var(--math);
+  position: absolute;
+  top: 0; left: 0; right: 0;
+}
+.back-btn {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 16px; color: var(--primary);
+  text-decoration: none; font-weight: 500;
+  flex-shrink: 0;
+}
+.back-btn svg { width: 20px; height: 20px; }
+.top-nav-title {
+  flex: 1; text-align: center;
+  font-size: 20px; font-weight: 700;
+  margin-right: 60px;
+}
+
+.content-wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Section Card ── */
+.section-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px 24px;
+}
+.section-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+/* ── Concept Section ── */
+.concept-intro {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+.character-area {
+  flex-shrink: 0;
+  width: 72px; height: 72px;
+  background: var(--math-bg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+}
+.speech-bubble {
+  position: relative;
+  background: var(--math-bg);
+  border-radius: 16px;
+  padding: 16px 20px;
+  font-size: 17px;
+  line-height: 1.7;
+  flex: 1;
+}
+.speech-bubble::before {
+  content: '';
+  position: absolute;
+  left: -10px; top: 20px;
+  width: 0; height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 12px solid var(--math-bg);
+}
+
+.concept-highlight {
+  background: white;
+  border-left: 4px solid var(--math);
+  padding: 16px 20px;
+  border-radius: 0 12px 12px 0;
+  margin-top: 16px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+.concept-highlight strong {
+  color: var(--math-dark);
+}
+
+.concept-visual {
+  background: #FAFAFA;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  margin-top: 16px;
+  font-size: 28px;
+  letter-spacing: 2px;
+  line-height: 2;
+}
+.concept-visual .carry {
+  display: inline-block;
+  background: var(--math);
+  color: white;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  font-size: 18px;
+  line-height: 32px;
+  text-align: center;
+  vertical-align: super;
+  font-weight: 700;
+}
+.concept-visual .underline {
+  border-bottom: 3px solid var(--text);
+  padding-bottom: 4px;
+}
+
+/* ── Flow Connector ── */
+.flow-connector {
+  text-align: center;
+  padding: 4px 0;
+}
+.flow-connector span {
+  display: inline-block;
+  background: var(--math-bg);
+  color: var(--math-dark);
+  font-size: 15px;
+  font-weight: 700;
+  padding: 8px 24px;
+  border-radius: 20px;
+}
+
+/* ── Example Section ── */
+.example-heading {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.step {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 16px;
+  align-items: flex-start;
+}
+.step:last-child { margin-bottom: 0; }
+.step-num {
+  flex-shrink: 0;
+  width: 36px; height: 36px;
+  background: var(--primary);
+  color: white;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 700;
+}
+.step-content {
+  flex: 1;
+  background: #F8F9FB;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 17px;
+  line-height: 1.7;
+}
+.step-content .highlight { color: var(--primary); font-weight: 700; }
+
+/* ── Practice Section ── */
+.problem-card {
+  background: #F8F9FB;
+  border-radius: 14px;
+  padding: 24px 20px;
+  margin-bottom: 14px;
+}
+.problem-card:last-child { margin-bottom: 0; }
+.problem-number {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+.problem-question {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+}
+.problem-input-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.problem-input {
+  width: 100px; height: 56px;
+  border: 2px solid #D0D0D0;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  font-family: 'Noto Sans KR', sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.problem-input:focus { border-color: var(--primary); }
+.problem-input.correct { border-color: var(--correct); background: var(--correct-bg); }
+.problem-input.wrong { border-color: var(--wrong); background: var(--wrong-bg); }
+
+/* ── Buttons ── */
+.btn-primary {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+  transition: background 0.2s;
+  min-height: 52px;
+}
+.btn-primary:hover { background: #3760A8; }
+.btn-primary:active { transform: scale(0.98); }
+
+.btn-secondary {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  background: white;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+  min-height: 52px;
+}
+
+/* ── Result Section ── */
+.result-card {
+  text-align: center;
+}
+.result-score {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--correct);
+  margin: 12px 0;
+}
+.result-score span { color: var(--text-light); font-size: 28px; }
+.result-character {
+  font-size: 64px;
+  margin: 8px 0;
+}
+.result-message {
+  position: relative;
+  display: inline-block;
+  background: var(--correct-bg);
+  padding: 16px 28px;
+  border-radius: 16px;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--correct);
+  line-height: 1.6;
+  margin: 12px 0 24px;
+}
+.result-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── Feedback States ── */
+.feedback-correct {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--correct-bg);
+  padding: 10px 14px;
+  border-radius: 10px;
+  margin-top: 12px;
+  font-size: 15px;
+  color: var(--correct);
+  font-weight: 500;
+}
+.feedback-wrong {
+  display: flex; align-items: flex-start; gap: 8px;
+  background: var(--wrong-bg);
+  padding: 10px 14px;
+  border-radius: 10px;
+  margin-top: 12px;
+  font-size: 15px;
+  color: var(--wrong);
+}
+.feedback-wrong .answer { font-weight: 700; }
+
+/* ── Related Topics ── */
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.related-card {
+  background: #F8F9FB;
+  border-radius: 14px;
+  padding: 16px;
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  transition: transform 0.2s;
+}
+.related-card:hover { transform: translateY(-2px); }
+.related-card .icon { font-size: 28px; margin-bottom: 6px; }
+.related-card .title { font-size: 15px; font-weight: 700; }
+.related-card .desc { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+
+/* ── Progress Bar ── */
+.progress-section {
+  padding: 0 20px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.progress-bar-bg {
+  height: 8px;
+  background: #E0E0E0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--math), var(--math-dark));
+  border-radius: 4px;
+  transition: width 0.3s;
+}
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 6px;
+}
+
+/* ── Design States Toggle ── */
+.design-label {
+  background: #FF5722;
+  color: white;
+  text-align: center;
+  padding: 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.state-toggle {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  padding: 12px 20px;
+  background: #333;
+  flex-wrap: wrap;
+}
+.state-btn {
+  padding: 6px 16px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: #444;
+  color: white;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.state-btn.active { background: #FF5722; border-color: #FF5722; }
+
+.view { display: none; }
+.view.active { display: block; }
+
+@media (max-width: 767px) {
+  .concept-intro { flex-direction: column; align-items: center; text-align: center; }
+  .speech-bubble::before { display: none; }
+  .related-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="design-label">디자인 시안 — 상세 페이지 템플릿 (수학: 받아올림 덧셈 예시)</div>
+<div class="state-toggle">
+  <button class="state-btn active" data-view="learning">학습 화면</button>
+  <button class="state-btn" data-view="practice">문제 풀기</button>
+  <button class="state-btn" data-view="result-good">결과 (잘함)</button>
+  <button class="state-btn" data-view="result-retry">결과 (재도전)</button>
+</div>
+
+<!-- ===== Top Nav (공통) ===== -->
+<nav class="top-nav">
+  <div class="top-nav-bar"></div>
+  <a class="back-btn" href="#">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+    돌아가기
+  </a>
+  <div class="top-nav-title">받아올림 덧셈</div>
+</nav>
+
+<!-- ===== STATE 1: 학습 화면 ===== -->
+<div class="view active" id="view-learning">
+  <div class="content-wrapper">
+
+    <!-- 개념 설명 -->
+    <div class="section-card">
+      <div class="section-label">개념 배우기</div>
+      <div class="concept-intro">
+        <div class="character-area">🐰</div>
+        <div class="speech-bubble">
+          안녕! 나는 <strong>토끼</strong>야. 🥕<br>
+          오늘은 나랑 같이 <strong>받아올림 덧셈</strong>을 배워볼 거야!<br>
+          내가 당근을 세다가 고민에 빠졌거든…
+        </div>
+      </div>
+
+      <div class="concept-highlight">
+        일의 자리를 더했을 때 <strong>10이 넘으면</strong>,
+        넘친 만큼 <strong>십의 자리로 올려줘요</strong>!<br>
+        마치 사탕 10개가 모이면 한 봉지에 담는 것처럼요. 🍬
+      </div>
+
+      <div class="concept-visual">
+        <div style="margin-bottom: 8px;">
+          <span style="opacity:0">+</span>
+          <span class="carry">1</span><br>
+        </div>
+        <span style="opacity:0">+</span> 2 <strong>7</strong><br>
+        + 1 <strong>8</strong><br>
+        <span class="underline">
+          <span style="opacity:0">+</span> 4 5
+        </span>
+      </div>
+    </div>
+
+    <!-- 흐름 연결 -->
+    <div class="flow-connector">
+      <span>🐰 같이 풀어볼까?</span>
+    </div>
+
+    <!-- 예시 문제 -->
+    <div class="section-card">
+      <div class="example-heading">✏️ 이렇게 풀어봐요!</div>
+
+      <div style="text-align:center; font-size:24px; font-weight:700; margin-bottom:20px; letter-spacing:2px; color: var(--text-light);">
+        27 + 18 = ?
+      </div>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          먼저 <span class="highlight">일의 자리</span>끼리 더해요.<br>
+          🐰 "7 + 8 = <span class="highlight">15</span>!"
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          15는 10보다 크죠? 10을 넘은 <span class="highlight">1</span>을 십의 자리로 올려줘요!<br>
+          🐰 "일의 자리에는 <span class="highlight">5</span>만 남겨놓자!"
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <span class="highlight">십의 자리</span>끼리 더하고, 올려준 1도 함께!<br>
+          🐰 "2 + 1 + 1 = <span class="highlight">4</span>! 그래서 답은 <span class="highlight">45</span>!"
+        </div>
+      </div>
+    </div>
+
+    <!-- 연습 시작 -->
+    <div class="flow-connector">
+      <span>🐰 이제 네가 해볼 차례야!</span>
+    </div>
+
+    <button class="btn-primary" onclick="showView('practice')">연습 문제 풀러 가기 →</button>
+  </div>
+</div>
+
+<!-- ===== STATE 2: 문제 풀기 ===== -->
+<div class="view" id="view-practice">
+  <div class="progress-section" style="padding-top:16px;">
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" style="width: 40%;"></div>
+    </div>
+    <div class="progress-label">
+      <span>문제 풀기</span>
+      <span>2 / 5</span>
+    </div>
+  </div>
+  <div class="content-wrapper">
+    <div class="section-card">
+      <div class="problem-card">
+        <div class="problem-number">문제 1</div>
+        <div class="problem-question">36 + 27 = ?</div>
+        <div class="problem-input-row">
+          <input type="text" class="problem-input correct" value="63" readonly>
+        </div>
+        <div class="feedback-correct">✅ 잘했어요! 토끼가 당근을 더 줄게요! 🥕</div>
+      </div>
+
+      <div class="problem-card">
+        <div class="problem-number">문제 2</div>
+        <div class="problem-question">48 + 35 = ?</div>
+        <div class="problem-input-row">
+          <input type="text" class="problem-input" placeholder="?" style="font-size:20px;">
+        </div>
+      </div>
+
+      <div class="problem-card" style="opacity: 0.5;">
+        <div class="problem-number">문제 3</div>
+        <div class="problem-question">19 + 54 = ?</div>
+        <div class="problem-input-row">
+          <input type="text" class="problem-input" placeholder="?" disabled style="font-size:20px;">
+        </div>
+      </div>
+
+      <div class="problem-card" style="opacity: 0.5;">
+        <div class="problem-number">문제 4</div>
+        <div class="problem-question">67 + 28 = ?</div>
+        <div class="problem-input-row">
+          <input type="text" class="problem-input" placeholder="?" disabled style="font-size:20px;">
+        </div>
+      </div>
+
+      <div class="problem-card" style="opacity: 0.5;">
+        <div class="problem-number">문제 5</div>
+        <div class="problem-question">45 + 39 = ?</div>
+        <div class="problem-input-row">
+          <input type="text" class="problem-input" placeholder="?" disabled style="font-size:20px;">
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-primary">정답 확인하기 ✓</button>
+  </div>
+</div>
+
+<!-- ===== STATE 3: 결과 (잘함) ===== -->
+<div class="view" id="view-result-good">
+  <div class="content-wrapper">
+    <div class="section-card result-card">
+      <div class="section-label">결과</div>
+      <div class="result-character">🐰</div>
+      <div class="result-score">4 <span>/ 5</span></div>
+      <div class="result-message">
+        우와! 토끼가 깜짝 놀랐어!<br>
+        당근을 거의 다 세줬구나! 대단해! 🥕🥕🥕🥕
+      </div>
+
+      <!-- 개별 결과 -->
+      <div style="text-align: left; width: 100%; margin-bottom: 20px;">
+        <div class="feedback-correct" style="margin-top:0; margin-bottom: 8px;">
+          ✅ 문제 1: 36 + 27 = 63
+        </div>
+        <div class="feedback-correct" style="margin-top:0; margin-bottom: 8px;">
+          ✅ 문제 2: 48 + 35 = 83
+        </div>
+        <div class="feedback-wrong" style="margin-top:0; margin-bottom: 8px;">
+          <div>
+            ❌ 문제 3: 19 + 54 → <span class="answer">정답: 73</span><br>
+            <span style="font-size:13px; color: #999;">🐰 "일의 자리 9+4=13이니까, 1을 올려줘야 해!"</span>
+          </div>
+        </div>
+        <div class="feedback-correct" style="margin-top:0; margin-bottom: 8px;">
+          ✅ 문제 4: 67 + 28 = 95
+        </div>
+        <div class="feedback-correct" style="margin-top:0; margin-bottom: 8px;">
+          ✅ 문제 5: 45 + 39 = 84
+        </div>
+      </div>
+
+      <div class="result-buttons">
+        <button class="btn-primary" onclick="showView('practice')">다시 풀어볼래요! 🔄</button>
+        <button class="btn-secondary" onclick="showView('learning')">개념 다시 보기 📖</button>
+      </div>
+    </div>
+
+    <!-- 관련 주제 -->
+    <div class="section-card">
+      <div class="section-label">이런 것도 해볼래? 🐰</div>
+      <div class="related-grid">
+        <a class="related-card" href="#">
+          <div class="icon">🐿️</div>
+          <div class="title">받아내림 뺄셈</div>
+          <div class="desc">빌려와서 빼는 법을 배워요</div>
+        </a>
+        <a class="related-card" href="#">
+          <div class="icon">🔢</div>
+          <div class="title">구구단 연습</div>
+          <div class="desc">곱하기의 기초를 다져요</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== STATE 4: 결과 (재도전) ===== -->
+<div class="view" id="view-result-retry">
+  <div class="content-wrapper">
+    <div class="section-card result-card">
+      <div class="section-label">결과</div>
+      <div class="result-character">🐰</div>
+      <div class="result-score" style="color: var(--primary);">2 <span>/ 5</span></div>
+      <div class="result-message" style="background: #EEF3FA; color: var(--primary);">
+        괜찮아! 토끼도 처음엔 당근 세기가 어려웠어.<br>
+        같이 다시 해보자! 💪
+      </div>
+
+      <div style="text-align: left; width: 100%; margin-bottom: 20px;">
+        <div class="feedback-correct" style="margin-top:0; margin-bottom: 8px;">
+          ✅ 문제 1: 36 + 27 = 63
+        </div>
+        <div class="feedback-wrong" style="margin-top:0; margin-bottom: 8px;">
+          <div>
+            ❌ 문제 2: 48 + 35 → <span class="answer">정답: 83</span><br>
+            <span style="font-size:13px; color: #999;">🐰 "8+5=13, 1을 올려주는 거 기억하자!"</span>
+          </div>
+        </div>
+        <div class="feedback-wrong" style="margin-top:0; margin-bottom: 8px;">
+          <div>
+            ❌ 문제 3: 19 + 54 → <span class="answer">정답: 73</span><br>
+            <span style="font-size:13px; color: #999;">🐰 "9+4=13이니까, 1을 올려줘야 해!"</span>
+          </div>
+        </div>
+        <div class="feedback-correct" style="margin-top:0; margin-bottom: 8px;">
+          ✅ 문제 4: 67 + 28 = 95
+        </div>
+        <div class="feedback-wrong" style="margin-top:0; margin-bottom: 8px;">
+          <div>
+            ❌ 문제 5: 45 + 39 → <span class="answer">정답: 84</span><br>
+            <span style="font-size:13px; color: #999;">🐰 "5+9=14, 4만 남기고 1을 올려줘!"</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-buttons">
+        <button class="btn-primary" onclick="showView('learning')">개념 다시 보기 📖</button>
+        <button class="btn-secondary" onclick="showView('practice')">다시 풀어볼래요! 🔄</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showView(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + id).classList.add('active');
+  document.querySelectorAll('.state-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.view === id);
+  });
+  window.scrollTo(0, 0);
+}
+
+document.querySelectorAll('.state-btn').forEach(btn => {
+  btn.addEventListener('click', () => showView(btn.dataset.view));
+});
+</script>
+</body>
+</html>
