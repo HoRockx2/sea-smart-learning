@@ -29,6 +29,16 @@
       "icon": "📖",
       "difficulty": 2,
       "page": "pages/korean-dictation.html"
+    },
+    {
+      "id": "math-hundreds-addition",
+      "title": "세 자리 수 덧셈",
+      "concept": "백의 자리까지 차근차근 더해봐요!",
+      "story": "다람쥐가 도토리를 너무 많이 모았어요…",
+      "category": "math",
+      "icon": "🐿️",
+      "difficulty": 3,
+      "page": "pages/math-hundreds-addition.html"
     }
   ]
 }
